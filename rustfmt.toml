@@ -1,0 +1,7 @@
+indent_style = "Block"
+binop_separator = "Front"
+empty_item_single_line = true
+remove_nested_parens = true
+reorder_imports = true
+reorder_modules = true
+tab_spaces = 2
