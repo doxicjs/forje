@@ -1,4 +1,6 @@
+use crate::services::render_template::render_template;
 use clap::{Arg, ArgAction, ArgMatches, Command};
+use tera::Context;
 
 pub fn cmd() -> clap::Command {
   return Command::new("query")
@@ -34,14 +36,13 @@ pub fn cmd() -> clap::Command {
 }
 
 pub fn exec(matches: Option<&ArgMatches>) {
+  let mut context = Context::new();
+
   let query_name = matches
     .unwrap()
     .try_get_one::<String>("query-name")
+    .unwrap()
     .unwrap();
-
-  if query_name.is_some() {
-    println!("{}", query_name.unwrap());
-  }
 
   let route_name = matches
     .unwrap()
@@ -49,14 +50,14 @@ pub fn exec(matches: Option<&ArgMatches>) {
     .unwrap();
 
   if route_name.is_some() {
-    println!("{}", route_name.unwrap());
+    context.insert("route".to_string(), &route_name.unwrap().to_string());
   }
 
-  let enabled_flag = matches.unwrap().get_one::<bool>("enabled-flag").unwrap();
+  // let enabled_flag = matches.unwrap().get_one::<bool>("enabled-flag").unwrap();
 
-  println!("{}", enabled_flag.to_string());
+  // let params_flag = matches.unwrap().get_one::<bool>("enabled-flag").unwrap();
 
-  let params_flag = matches.unwrap().get_one::<bool>("enabled-flag").unwrap();
+  context.insert("name".to_string(), &query_name.to_string());
 
-  println!("{}", params_flag.to_string());
+  render_template("query/base.template".to_string(), context)
 }

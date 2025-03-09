@@ -1,6 +1,7 @@
 use clap::command;
 
 mod commands;
+mod services;
 use commands::{query_cmd, query_exec};
 
 fn main() {

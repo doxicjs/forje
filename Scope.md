@@ -31,12 +31,6 @@ export type TResponse = TUser
 
 export const QKEY_ENTITY = 'ENTITY'
 
-export const ParamsSchema = z.object({})
-
-export type TParams = z.infer<typeof ParamsSchema>
-export type TRouteParams = {  }
-export type TOpts = TParams & TRouteParams
-
 export const useEntity = () => {
   return useQuery({
     queryKey: [QKEY_ENTITY],
