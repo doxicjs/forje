@@ -1,7 +1,14 @@
 [package]
-name = "forge"
+name = "forje"
 version = "0.0.2"
 edition = "2024"
+authors = ["Jargalsaikhan Erdenetsetseg thejargalsaikhan@gmail.com"]
+license = "ISC"
+readme = "README.md"
+homepage = "https://github.com/doxicjs/forje"
+repository = "https://github.com/doxicjs/forje"
+keywords = ["cli", "code generate"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 clap = { version = "4.5.31", features = ["cargo"] }

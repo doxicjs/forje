@@ -1,4 +1,4 @@
-# Forge
+# Forje
 
 > Hammering code for a polished foundation.
 
@@ -16,7 +16,7 @@ Depends on:
 #### Default Query
 
 ```zsh
-forge query [ENTITY]
+forje query [ENTITY]
 ```
 
 Generates the following:
@@ -48,7 +48,7 @@ export const useEntity = () => {
 #### Route Params Query
 
 ```zsh
-forge query [ENTITY] -r id
+forje query [ENTITY] -r id
 ```
 
 Generates the following:
@@ -84,7 +84,7 @@ export const useEntity = (opts: TOpts) => {
 #### Params Query
 
 ```zsh
-forge query [ENTITY] -p
+forje query [ENTITY] -p
 ```
 
 Generates the following:
@@ -122,7 +122,7 @@ export const useEntity = (opts: TOpts) => {
 #### Params & Route Params Query
 
 ```zsh
-forge query [ENTITY] -p -r id
+forje query [ENTITY] -p -r id
 ```
 
 Generates the following:
