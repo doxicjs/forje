@@ -8,7 +8,7 @@ license = "ISC"
 readme = "README.md"
 homepage = "https://github.com/doxicjs/forje"
 repository = "https://github.com/doxicjs/forje"
-keywords = ["cli", "code generate"]
+keywords = ["cli", "utility"]
 categories = ["command-line-utilities"]
 
 [dependencies]
