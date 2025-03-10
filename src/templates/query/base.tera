@@ -1,0 +1,38 @@
+{% import "query/_macros.tera" as macros %}
+{%- if route_name %}{% set has_route = true %}{% else %}{% set has_route = false %}{% endif %}
+{% if params_name %}{% set has_params = true %}{% else %}{% set has_params = false %}{% endif -%}
+import { useQuery } from '@tanstack/react-query'
+{%- if has_params %}
+{{ macros::import_deps() }}
+{%- endif %}
+import { api } from '@/shared/utils/fetch'
+import { T{{query_name | to_up_camel}} } from '@/shared/types/models/{{query_name | to_kebab}}'
+
+export type TResponse = T{{query_name | to_up_camel}}
+
+export const QKEY_{{query_name | to_up_snake}} = '{{query_name | to_up_snake}}'
+
+{%- if has_params %}
+{{ macros::dec_params_schema(params_name=params_name) }}
+{%- endif %}
+
+{%- if has_route %}
+{{ macros::dec_route_type(route_name=route_name) }}
+{%- endif %}
+
+{{- macros::dec_opts_type(has_route=has_route, has_params=has_params) -}}
+
+export const use{{query_name | to_up_camel}} = ({{ macros::gen_opts(has_route=has_route, has_params=has_params) }}) => {
+  return useQuery({
+    queryKey: [QKEY_{{query_name | to_up_snake}}{% if has_route or has_params %}, opts{% endif %}],
+    queryFn: async ({ signal }) => {
+      const { data } = await api.get<TResponse>('/api', {
+        signal
+      })
+      return data
+    },
+    {%- if has_route and is_enabled %}
+    {{ macros::gen_enabled_flag(route_name=route_name) }}
+    {%- endif %}
+  })
+}

@@ -1,0 +1,33 @@
+{# IMPORT PARAMS DEPENDENCIES #}
+{% macro import_deps() %}import { z } from 'zod'{% endmacro import_deps %}
+
+{# DECLARE PARAMS SCHEMA #}
+{% macro dec_params_schema(params_name) %}
+export const {{ params_name | to_up_camel}}Schema = z.object({})
+
+export type TParams = z.infer<typeof {{ params_name | to_up_camel}}Schema>
+{%- endmacro dec_params_schema %}
+
+{# DECLARE ROUTE TYPE #}
+{% macro dec_route_type(route_name) %}
+export type TRouteParams = { {{ route_name }}: number | null }
+{%- endmacro dec_route_type %}
+
+{# DECLARE OPTS TYPE #}
+{% macro dec_opts_type(has_route, has_params) %}
+{% if has_route and has_params %}
+export type TOpts = TParams & TRouteParams
+{% elif has_route %}
+export type TOpts = TRouteParams
+{% elif has_params %}
+export type TOpts = TParams
+{% endif %}
+{% endmacro dec_opts_type %}
+
+{# GENERATE OPTS #}
+{% macro gen_opts(has_route, has_params) %}
+{%- if has_route or has_params %}opts: TOpts{% endif -%}
+{% endmacro gen_opts %}
+
+{# GENERATE ENABLED FLAG #}
+{% macro gen_enabled_flag(route_name) %}enabled: Boolean(opts.{{ route_name }}){% endmacro gen_enabled_flag %}

@@ -6,32 +6,31 @@ pub fn cmd() -> clap::Command {
   return Command::new("query")
     .about("Forges Queries using Tanstack Query\nForges use{Name}.tsx file that exports the query")
     .arg(
-      Arg::new("query-name")
+      Arg::new("query_name")
         .short('n')
         .long("name")
         .required(true)
         .help("Hammers the name of the query"),
     )
     .arg(
-      Arg::new("route-name")
+      Arg::new("route_name")
         .short('r')
         .long("route")
         .help("Hammers the query with Route param"),
     )
     .arg(
-      Arg::new("enabled-flag")
+      Arg::new("params_name")
+        .short('p')
+        .long("params")
+        .help("Hammers the query with Params Zod schema"),
+    )
+    .arg(
+      Arg::new("is_enabled")
         .short('e')
         .long("enabled")
         .action(ArgAction::SetTrue)
-        .requires("route-name")
+        .requires("route_name")
         .help("Hammers the query to only run when Route is provided"),
-    )
-    .arg(
-      Arg::new("params-flag")
-        .short('p')
-        .long("params")
-        .action(ArgAction::SetTrue)
-        .help("Hammers the query with Params Zod schema"),
     );
 }
 
@@ -40,24 +39,33 @@ pub fn exec(matches: Option<&ArgMatches>) {
 
   let query_name = matches
     .unwrap()
-    .try_get_one::<String>("query-name")
+    .try_get_one::<String>("query_name")
     .unwrap()
     .unwrap();
 
   let route_name = matches
     .unwrap()
-    .try_get_one::<String>("route-name")
+    .try_get_one::<String>("route_name")
     .unwrap();
 
   if route_name.is_some() {
-    context.insert("route".to_string(), &route_name.unwrap().to_string());
+    context.insert("route_name", &route_name.unwrap().to_string());
   }
 
-  // let enabled_flag = matches.unwrap().get_one::<bool>("enabled-flag").unwrap();
+  let params_name = matches
+    .unwrap()
+    .try_get_one::<String>("params_name")
+    .unwrap();
 
-  // let params_flag = matches.unwrap().get_one::<bool>("enabled-flag").unwrap();
+  if params_name.is_some() {
+    context.insert("params_name", &params_name.unwrap().to_string());
+  }
 
-  context.insert("name".to_string(), &query_name.to_string());
+  let is_enabled = matches.unwrap().get_one::<bool>("is_enabled").unwrap();
 
-  render_template("query/base.template".to_string(), context)
+  context.insert("is_enabled", &is_enabled);
+
+  context.insert("query_name", &query_name.to_string());
+
+  render_template(&"query/base.tera", &context)
 }
