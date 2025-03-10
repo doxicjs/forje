@@ -1,5 +1,6 @@
 [package]
 name = "forje"
+description = "Hammering code for a polished foundation."
 version = "0.0.2"
 edition = "2024"
 authors = ["Jargalsaikhan Erdenetsetseg thejargalsaikhan@gmail.com"]
