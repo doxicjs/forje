@@ -31,7 +31,7 @@ export const use{{query_name | to_up_camel}} = ({{ macros::gen_opts(has_route=ha
       })
       return data
     },
-    {%- if has_route and is_enabled %}
+    {%- if has_route %}
     {{ macros::gen_enabled_flag(route_name=route_name) }}
     {%- endif %}
   })
