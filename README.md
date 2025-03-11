@@ -2,7 +2,13 @@
 
 **"Hammering code for a polished foundation."**
 
-`forje` is a powerful CLI tool designed to generate various code patterns for both frontend and backend projects. It simplifies development by automatically creating essential code structures.
+`forje` is a soon-to-be powerful CLI tool designed to generate various code patterns featured in the unreleased *“2khan’s Guide to Doxic Systems”*, `forje` simplifies development by automatically creating essential code structures with an opinionated writing style for both frontend and backend projects.
+
+> ## Forjed in Progress
+>
+>`forje` is fresh from the anvil — raw, unrefined, and still glowing red-hot. Each update tempers the tool, hardening its features and sharpening its edge. Expect sparks, rough edges, and plenty of hammer strikes as we "forje" into a powerful code-crafting tool. Your feedback is the heat that shapes the steel — so strike while the iron’s hot!
+
+*Don’t worry, no blacksmiths were harmed in the making of this tool.*
 
 ## Installation
 
@@ -65,4 +71,6 @@ To update the CLI in the future, simply run:
 cargo install forje --force
 ```
 
-WIP - 2khan
+## Still in the Furnace
+
+`forje` is just getting started, and so is its documentation. Expect detailed guides, examples, and best practices to be added as the tool evolves. Stay tuned — the anvil’s hot, and the hammer’s still swinging!
