@@ -37,6 +37,10 @@ pub fn cmd() -> clap::Command {
 pub fn exec(matches: Option<&ArgMatches>) {
   let mut context = Context::new();
 
+  if matches.is_none() {
+    return;
+  }
+
   let query_name = matches
     .unwrap()
     .try_get_one::<String>("query_name")
