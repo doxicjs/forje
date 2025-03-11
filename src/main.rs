@@ -4,6 +4,9 @@ mod commands;
 mod services;
 mod utils;
 use commands::{query_cmd, query_exec};
+use include_dir::{Dir, include_dir};
+
+static TEMPLATES_DIR: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/src/templates");
 
 fn main() {
   let matches = command!()
